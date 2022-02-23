@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+    terraform:
+        container_name: sample_terraform
+        build: ./
+        working_dir: /home/
+        environment:
+            TF_VERSION: 1.1.0 #terraformのバージョン指定 各ディレクトリのconfig.tfと合わせる
+        command: bash -c "tfenv install $$TF_VERSION && tfenv use $$TF_VERSION && tail -f /home/Dockerfile"
+        volumes:
+          - ~/.aws/:/root/.aws/
+          - ./:/home/
